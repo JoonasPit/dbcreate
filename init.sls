@@ -1,8 +1,9 @@
-/tmp/createuse.sql:
+/usr/local/bin/createuser.sh:
   file.managed:
-    - mode: 600
-    - source: salt://dbcreate/createuser.sql
+    - source: salt://dbcreate/createuser.sh
 
-'cat /tmp/createuser.sql|mariadb -u root':
-  cmd.run:
-    - unless: "echo 'show databases'|sudo mariadb -u root'"
+"sudo chmod a+x /usr/local/bin/createuser.sh":
+  cmd.run
+
+"createuser.sh":
+  cmd.run
