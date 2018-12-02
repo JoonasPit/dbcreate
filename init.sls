@@ -1,9 +1,7 @@
-/usr/local/bin/createuser.sh:
+/tmp/createuser.sql:
   file.managed:
-    - source: salt://dbcreate/createuser.sh
+    - source: salt://dbcreate/createuser.sql
 
-"sudo chmod a+x /usr/local/bin/createuser.sh":
-  cmd.run
-
-"createuser.sh":
-  cmd.run
+'cat /tmp/createuser.sql|mariadb -u root':
+  cmd.run:
+    - unless: "echo 'show databases'|sudo mariadb -u root|grep '^kukat$'"
